@@ -106,10 +106,8 @@ switch (location.href.split('#/')[0]) {
 service.$host = apiServerHost;
 // 设置post请求头
 service.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
 // 请求拦截器
 service.interceptors.request.use(
-
   config => {
     // 登录流程控制中，根据本地是否存在token判断用户的登录情况
     // 但是即使token存在，也有可能token是过期的，所以在每次的请求头中携带token
