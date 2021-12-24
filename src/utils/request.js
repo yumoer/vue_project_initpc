@@ -106,7 +106,6 @@ switch (location.href.split('#/')[0]) {
 service.$host = apiServerHost;
 // 设置post请求头
 service.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
 // 请求拦截器
 service.interceptors.request.use(
   config => {
