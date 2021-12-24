@@ -53,7 +53,6 @@ const tip = (msg,type) => {
 };
 
 const box = msg => {
-  console.log('111')
   MessageBox({
     title: '提示',
     message: msg,
