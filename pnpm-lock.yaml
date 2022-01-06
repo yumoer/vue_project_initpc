@@ -2932,9 +2932,9 @@ packages:
     dev: true
 
   registry.npmmirror.com/axios/0.21.4_debug@4.3.2:
-    resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/axios/download/axios-0.21.4.tgz}
-    id: registry.npmmirror.com/axios/0.21.4
-    name: axios
+    resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/http/download/http-0.21.4.tgz}
+    id: registry.npmmirror.com/http/0.21.4
+    name: http
     version: 0.21.4
     dependencies:
       follow-redirects: registry.npmmirror.com/follow-redirects/1.14.6_debug@4.3.2
@@ -4492,7 +4492,7 @@ packages:
     engines: {node: '>=10.0.0'}
     hasBin: true
     dependencies:
-      axios: registry.npmmirror.com/axios/0.21.4_debug@4.3.2
+      axios: registry.npmmirror.com/http/0.21.4_debug@4.3.2
       joi: registry.npmmirror.com/joi/17.5.0
       lodash: registry.npmmirror.com/lodash/4.17.21
       minimist: registry.nlark.com/minimist/1.2.5

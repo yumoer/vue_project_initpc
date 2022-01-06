@@ -96,7 +96,7 @@ export default defineConfig({
     //检测需要预构建的依赖项
     // entries: [],
     // //默认情况下，不在 node_modules 中的，链接的包不会预构建
-    // // include: ['axios'],
+    // // include: ['http'],
     // exclude:['your-package-name'] //排除在优化之外
   },
   // css
