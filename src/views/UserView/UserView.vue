@@ -4,22 +4,22 @@
       <div class="justify-between group">
         <span>9:41</span>
         <div class="flex-row group_1">
-          <img
+          <img alt=""
               src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234009834185347774.png"
               class="image"
           />
-          <img
+          <img alt=""
               src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234009834150509331.png"
               class="image_1"
           />
-          <img
+          <img alt=""
               src="https://project-user-resource-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234009849815279916.png"
               class="image_2"
           />
         </div>
       </div>
       <div class="flex-row group_2">
-        <img
+        <img alt=""
             src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234009834202809352.png"
             class="image_3"
             @click="onBack"
@@ -29,7 +29,7 @@
     </div>
     <div class="flex-col group_3">
       <div class="flex-row section_1">
-        <img
+        <img alt=""
             src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16240632328637855616.png"
             class="image_4"
         />
@@ -39,28 +39,28 @@
         <span class="text_3">我的订单</span>
         <div class="flex-row equal-division">
           <div class="flex-col items-center equal-division-item">
-            <img
+            <img alt=""
                 src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16240632337528305414.png"
                 class="image_5"
             />
             <span class="text_4">待付款</span>
           </div>
           <div class="equal-division-item_1 flex-col items-center">
-            <img
+            <img alt=""
                 src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16240632337794454995.png"
                 class="image_6"
             />
             <span class="text_5">待使用</span>
           </div>
           <div class="equal-division-item_1 flex-col items-center">
-            <img
+            <img alt=""
                 src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16240632337834988033.png"
                 class="image_6"
             />
             <span class="text_5">待评价</span>
           </div>
           <div class="flex-col items-center equal-division-item_2">
-            <img
+            <img alt=""
                 src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16240632337859367126.png"
                 class="image_9"
             />
@@ -70,21 +70,21 @@
       </div>
       <div class="flex-col section_3">
         <div class="flex-row">
-          <img
+          <img alt=""
               src="https://project-user-resource-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16240632357078987519.png"
               class="image_10"
           />
           <span class="text_9">我的浏览记录</span>
         </div>
         <div class="flex-row group_7">
-          <img
+          <img alt=""
               src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16240632328709050413.png"
               class="image_11"
           />
           <span class="text_10">我的收藏</span>
         </div>
         <div class="flex-row group_8">
-          <img
+          <img alt=""
               src="https://project-user-resource-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16240632357080184657.png"
               class="image_12"
           />
@@ -92,7 +92,7 @@
         </div>
       </div>
       <div class="section_4 flex-row">
-        <img
+        <img alt=""
             src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16240632328724869484.png"
             class="image_13"
         />
@@ -100,21 +100,21 @@
       </div>
       <div class="section_4 flex-col">
         <div class="flex-row group_9">
-          <img
+          <img alt=""
               src="https://project-user-resource-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16240632357082541476.png"
               class="image_15"
           />
           <span class="text_13">服务条款</span>
         </div>
         <div class="flex-row group_10">
-          <img
+          <img alt=""
               src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16240632328615957223.png"
               class="image_16"
           />
           <span class="text_14">我要反馈</span>
         </div>
         <div class="flex-row group_11">
-          <img
+          <img alt=""
               src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16240632337181384256.png"
               class="image_13"
           />

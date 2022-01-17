@@ -1,5 +1,5 @@
 // http/http.js
-import instance from "./index"
+import instance from "index"
 /**
  * @param {String} method  请求的方法：get、post、delete、put
  * @param {String} url     请求的url:

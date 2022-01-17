@@ -8,6 +8,7 @@
     "isolatedModules": true,
     "strict": true,
     "jsx": "preserve",
+    "noImplicitAny": true, // TypeScript编译器标志
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,

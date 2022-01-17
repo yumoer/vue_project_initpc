@@ -5,7 +5,7 @@ console.log(import.meta.env)
 let baseUrl = ''
 switch (import.meta.env.DEV === true && import.meta.env.MODE === 'development') {
   case true:
-    baseUrl = 'http://api.行丰银拓.com'
+    baseUrl = 'http://api.hfyt365.com'
     break
   case false:
     baseUrl = 'http://192.168.1.31:8001'
@@ -23,8 +23,8 @@ let instance = axios.create({
     'Content-Type': 'application/json;charset=UTF-8;',
   }
 })
-let loading
-let message
+let loading = ElLoading.service({});
+let message;
 //正在请求的数量
 let requestCount = 0
 //显示loading
@@ -36,7 +36,7 @@ const showLoading = () => {
       spinner: 'el-icon-loading',
       lock:true,
       fullscreen: true,
-      target:'.page'
+      target:'.flex-col .list'
     })
   }
   requestCount++

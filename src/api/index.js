@@ -3,15 +3,21 @@ import axios from "../http/index"
 //get
 export const mokeGet = (data) => {
   return axios({
-    url: "/xadmin/service/",
+    url: "/announcement/list/",
     method: "get",
     data,
+    config: {
+      headers: {
+        'Request-Type': 'wechat'
+      },
+      timeout: 10000
+    }
   })
 }
 //post
 export const mokePost = (data) => {
   return axios({
-    url: "/announcement/list/1/",
+    url: "/announcement/list/",
     method: "post",
     data,
     config: {

@@ -1,7 +1,7 @@
 <script lang="ts">
 import {ref,reactive,toRefs,onMounted} from "vue";
 import {useRouter} from "vue-router";
-import {mokeGet} from '../api'
+import {mokeGet} from '@/api'
 export default {
   data(){
     return{
@@ -62,27 +62,31 @@ export default {
   },
   setup(){
     let centerDialogVisible = ref(false)
+    let homeData: any
     onMounted(async () => {
-      await mokeGet().then(res=>{
-        console.log(res.data,res.status)
-
-      }).catch(err=>{
-        console.log(err)
-        if(err.status === 401){
-          centerDialogVisible = ref(true)
-        }
-      })
+      await setTimeout(():void=>{
+        mokeGet().then((res:any)=>{
+          console.log(res.data,res.status)
+          if(res.status === 200 || res.status === 201){
+            homeData = res.data
+          }
+        }).catch((err:any)=>{
+          console.log(err)
+          if(err.status === 401){
+            centerDialogVisible = ref(true)
+          }
+        })
+      },2000)
     })
     const router = useRouter()
     const state = reactive({
       list:[],
-      goToPage(path,item){
+      goToPage(path:string,item:any):void {
         console.log(item)
         router.push(path+'?id='+item.id)
       }
     })
-
-    return{...toRefs(state),centerDialogVisible}
+    return{...toRefs(state),homeData,centerDialogVisible}
   }
 }
 </script>
@@ -93,15 +97,15 @@ export default {
       <div class="justify-between group">
         <span>9:41</span>
         <div class="flex-row group_1">
-          <img
+          <img alt=""
               src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234009834185347774.png"
               class="image"
           />
-          <img
+          <img alt=""
               src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234009834150509331.png"
               class="image_1"
           />
-          <img
+          <img alt=""
               src="https://project-user-resource-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234009849815279916.png"
               class="image_2"
           />
@@ -110,26 +114,26 @@ export default {
       <span class="text_1">FF办公空间</span>
     </div>
     <div class="flex-col group_2">
-      <img class="image_3" :src="banner" />
+      <img alt="" class="image_3" :src="banner" />
       <div class="flex-row equal-division">
-        <div class="equal-division-item flex-col items-center" v-for="(item,i) in iconData">
-          <img class="image_4" :src="item.image" />
+        <div class="equal-division-item flex-col items-center" v-for="(item,index) in iconData" :key="index">
+          <img alt="" class="image_4" :src="item.image" />
           <span class="text_2">{{item.name}}</span>
         </div>
       </div>
       <div class="flex-col group_7">
         <span class="text_7">热推空间</span>
         <div class="flex-col list">
-          <div class="list-item flex-row" :key="i" v-for="(item, i) in homeData" @click="goToPage('/detail',item)" >
-            <img class="image_9" :src="item.image" />
+          <div class="list-item flex-row" v-for="(item, i) in homeData" :key="i" @click="goToPage('/detail',item)" >
+            <img alt="" class="image_9" :src="item.image" />
             <div class="right-group flex-col">
               <div class="flex-col">
                 <span class="text_8">{{item.name}}</span>
-                <span class="text_10">{{item.address}}</span>
+                <span class="text_10">{{item.decs}}</span>
               </div>
               <div class="bottom-group justify-end">
-                <span class="text_12">{{item.price}}</span>
-                <span class="text_14">{{item.info}}</span>
+                <span class="text_12">{{item.create_time}}</span>
+                <span class="text_14">{{item.browse}}</span>
               </div>
             </div>
           </div>
