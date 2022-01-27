@@ -1,103 +1,87 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-  <router-view />
+	<el-config-provider :locale="i18nLocale">
+		<router-view v-show="getThemeConfig.lockScreenTime !== 0" />
+		<LockScreen v-if="getThemeConfig.isLockScreen" />
+		<Setings ref="setingsRef" v-show="getThemeConfig.lockScreenTime !== 0" />
+		<CloseFull />
+	</el-config-provider>
 </template>
 
-<style>
-@import '../src/assets/index.css';
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0;
-  font-weight: normal;
-}
-
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
+<script lang="ts">
+import { computed, ref, getCurrentInstance, onBeforeMount, onMounted, onUnmounted, nextTick, defineComponent, watch, reactive, toRefs } from 'vue';
+import { useRoute } from 'vue-router';
+import { useStore } from '/@/store/index';
+import other from '/@/utils/other';
+import { Local, Session } from '/@/utils/storage';
+import setIntroduction from '/@/utils/setIconfont';
+import LockScreen from '/@/layout/lockScreen/index.vue';
+import Setings from '/@/layout/navBars/breadcrumb/setings.vue';
+import CloseFull from '/@/layout/navBars/breadcrumb/closeFull.vue';
+export default defineComponent({
+	name: 'app',
+	components: { LockScreen, Setings, CloseFull },
+	setup() {
+		const { proxy } = getCurrentInstance() as any;
+		const setingsRef = ref();
+		const route = useRoute();
+		const store = useStore();
+		const state = reactive({
+			i18nLocale: null,
+		});
+		// 获取布局配置信息
+		const getThemeConfig = computed(() => {
+			return store.state.themeConfig.themeConfig;
+		});
+		// 布局配置弹窗打开
+		const openSetingsDrawer = () => {
+			setingsRef.value.openDrawer();
+		};
+		// 设置初始化，防止刷新时恢复默认
+		onBeforeMount(() => {
+			// 设置批量第三方 icon 图标
+			setIntroduction.cssCdn();
+			// 设置批量第三方 js
+			setIntroduction.jsCdn();
+		});
+		// 页面加载时
+		onMounted(() => {
+			nextTick(() => {
+				// 监听布局配置弹窗点击打开
+				proxy.mittBus.on('openSetingsDrawer', () => {
+					openSetingsDrawer();
+				});
+				// 设置 i18n，App.vue 中的 el-config-provider
+				proxy.mittBus.on('getI18nConfig', (locale: string) => {
+					state.i18nLocale = locale;
+				});
+				// 获取缓存中的布局配置
+				if (Local.get('themeConfig')) {
+					store.dispatch('themeConfig/setThemeConfig', Local.get('themeConfig'));
+					document.documentElement.style.cssText = Local.get('themeConfigStyle');
+				}
+				// 获取缓存中的全屏配置
+				if (Session.get('isTagsViewCurrenFull')) {
+					store.dispatch('tagsViewRoutes/setCurrenFullscreen', Session.get('isTagsViewCurrenFull'));
+				}
+			});
+		});
+		// 页面销毁时，关闭监听布局配置/i18n监听
+		onUnmounted(() => {
+			proxy.mittBus.off('openSetingsDrawer', () => {});
+			proxy.mittBus.off('getI18nConfig', () => {});
+		});
+		// 监听路由的变化，设置网站标题
+		watch(
+			() => route.path,
+			() => {
+				other.useTitle();
+			}
+		);
+		return {
+			setingsRef,
+			getThemeConfig,
+			...toRefs(state),
+		};
+	},
+});
+</script>
