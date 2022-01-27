@@ -1,11 +1,9 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
   <router-view />
 </template>
+<script setup lang="ts">
 
+</script>
 <style>
 @import '../src/assets/index.css';
 #app {
