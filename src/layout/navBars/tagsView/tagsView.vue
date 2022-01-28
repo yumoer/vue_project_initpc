@@ -49,7 +49,6 @@ import { ElMessage } from 'element-plus';
 import { useStore } from '/@/store/index';
 import { Session } from '/@/utils/storage';
 import { isObjectValueEqual } from '/@/utils/arrayOperation';
-import other from '/@/utils/other';
 import Contextmenu from '/@/layout/navBars/tagsView/contextmenu.vue';
 export default {
 	name: 'layoutTagsView',
@@ -398,10 +397,10 @@ export default {
 			});
 		};
 		// 设置 tagsView 可以进行拖拽
-		const initSortable = async () => {
+		const initSortable = () => {
 			const el = document.querySelector('.layout-navbars-tagsview-ul') as HTMLElement;
 			if (!el) return false;
-			state.sortable.el && state.sortable.destroy();
+			state.sortable && state.sortable.destroy();
 			state.sortable = Sortable.create(el, {
 				animation: 300,
 				dataIdAttr: 'data-url',
@@ -418,9 +417,11 @@ export default {
 			});
 		};
 		// 拖动问题，https://gitee.com/lyt-top/vue-next-admin/issues/I3ZRRI
-		const onSortableResize = async () => {
-			await initSortable();
-			if (other.isMobile()) state.sortable.el && state.sortable.destroy();
+		const onSortableResize = () => {
+			const clientWidth = document.body.clientWidth;
+			if (clientWidth < 1000) getThemeConfig.value.isSortableTagsView = false;
+			else getThemeConfig.value.isSortableTagsView = true;
+			initSortable();
 		};
 		// 页面加载前
 		onBeforeMount(() => {

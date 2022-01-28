@@ -1,6 +1,6 @@
 import { nextTick } from 'vue';
 import type { App } from 'vue';
-import * as svg from '@element-plus/icons-vue';
+import * as svg from '@element-plus/icons';
 import router from '/@/router/index';
 import { store } from '/@/store/index';
 import { i18n } from '/@/i18n/index';
@@ -25,14 +25,16 @@ export function elSvg(app: App) {
  * @method const title = useTitle(); ==> title()
  */
 export function useTitle() {
-	nextTick(() => {
-		let webTitle = '';
-		let globalTitle: string = store.state.themeConfig.themeConfig.globalTitle;
-		router.currentRoute.value.path === '/login'
-			? (webTitle = router.currentRoute.value.meta.title as any)
-			: (webTitle = i18n.global.t(router.currentRoute.value.meta.title as any));
-		document.title = `${webTitle} - ${globalTitle}` || globalTitle;
-	});
+	return () => {
+		nextTick(() => {
+			let webTitle = '';
+			let globalTitle: string = store.state.themeConfig.themeConfig.globalTitle;
+			router.currentRoute.value.path === '/login'
+				? (webTitle = router.currentRoute.value.meta.title as any)
+				: (webTitle = i18n.global.t(router.currentRoute.value.meta.title as any));
+			document.title = `${webTitle} - ${globalTitle}` || globalTitle;
+		});
+	};
 }
 
 /**
@@ -90,28 +92,12 @@ export function deepClone(obj: any) {
 }
 
 /**
- * 判断是否是移动端
- */
-export function isMobile() {
-	if (
-		navigator.userAgent.match(
-			/('phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone')/i
-		)
-	) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-/**
  * 统一批量导出
  * @method elSvg 导出全局注册 element plus svg 图标
  * @method useTitle 设置浏览器标题国际化
  * @method lazyImg 图片懒加载
  * @method globalComponentSize element plus 全局组件大小
  * @method deepClone 对象深克隆
- * @method isMobile 判断是否是移动端
  */
 const other = {
 	elSvg: (app: App) => {
@@ -128,9 +114,6 @@ const other = {
 	},
 	deepClone: (obj: any) => {
 		deepClone(obj);
-	},
-	isMobile: () => {
-		return isMobile();
 	},
 };
 

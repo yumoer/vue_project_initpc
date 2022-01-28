@@ -1,5 +1,5 @@
 import { nextTick } from 'vue';
-import * as svg from '@element-plus/icons-vue';
+import * as svg from '@element-plus/icons';
 
 // 获取阿里字体图标
 const getAlicdnIconfont = () => {
