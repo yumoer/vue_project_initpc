@@ -437,8 +437,9 @@ export default {
 			}
 			.home-dynamic-item-left {
 				text-align: right;
-				.home-dynamic-item-left-time1 {
-				}
+				// .home-dynamic-item-left-time1 {
+
+				// }
 				.home-dynamic-item-left-time2 {
 					font-size: 13px;
 					color: var(--el-text-color-secondary);
