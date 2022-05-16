@@ -31,7 +31,7 @@
       <div class="flex-col group_7">
         <span class="text_7">热推空间</span>
         <div class="flex-col list">
-          <div class="list-item flex-row" v-for="(item, i) in homeData" :key="i" @click="goToPage('/detail',item)" >
+          <div class="list-item flex-row" v-for="(item, i) in homeData" :key="i" @click="state.goToPage('/detail',item)" >
             <img alt="" class="image_9" :src="item.image" />
             <div class="right-group flex-col">
               <div class="flex-col">
@@ -59,97 +59,84 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {ref,reactive,toRefs,onMounted} from "vue";
 import {useRouter} from "vue-router";
-import {mokeGet} from '@/api';
-export default {
-  data(){
-    return{
-      homeData: [
-        {
-          id:1,
-          image:
-              'https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010093853079242.png',
-          name: '维新软件科学园',
-          address: '深圳市南山区中心路3331号',
-          price: '¥1,870',
-          info: '起/工位/月',
-        },
-        {
-          id:2,
-          image:
-              'https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010093836713715.png',
-          name: '中集大厦',
-          address: '深圳市南山区高新南九道9号',
-          price: '¥2,240',
-          info: '起/工位/月',
-        },
-        {
-          id:3,
-          image:
-              'https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010093817997494.png',
-          name: '深业大厦',
-          address: '深圳市福田区后山路500号',
-          price: '¥1,650',
-          info: '起/工位/月',
-        },
-      ],
-      iconData:[
-        {
-          image:
-              'https://project-user-resource-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010113644013648.png',
-          name: '地图找楼',
-        },
-        {
-          image:
-              'https://project-user-resource-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010113644167452.png',
-          name: '核心商圈',
-        },
-        {
-          image:
-              'https://project-user-resource-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010113669698766.png',
-          name: '全景参观',
-        },
-        {
-          image:
-              'https://project-user-resource-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010113663525642.png',
-          name: '咨询热线',
-        }
-      ],
-      banner:
-          'https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010093791214053.png',
-    };
+import { mokeGet } from '../../api';
+let centerDialogVisible = ref(false)
+let iconData = [
+  {
+    image:
+        'https://project-user-resource-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010113644013648.png',
+    name: '地图找楼',
   },
-  setup(){
-    let centerDialogVisible = ref(false)
-    let homeData: any
-    onMounted(async () => {
-      await setTimeout(():void=>{
-        mokeGet().then((res:any)=>{
-          console.log(res.data,res.status)
-          if(res.status === 200 || res.status === 201){
-            homeData = res.data
-          }
-        }).catch((err:any)=>{
-          console.log(err)
-          if(err.status === 401){
-            centerDialogVisible = ref(true)
-          }
-        })
-      },2000)
-    })
-    const router = useRouter()
-    const state = reactive({
-      list:[],
-      goToPage(path:string,item:any):void {
-        console.log(item)
-        router.push(path+'?id='+item.id)
-      }
-    })
-    return{...toRefs(state),homeData,centerDialogVisible}
+  {
+    image:
+        'https://project-user-resource-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010113644167452.png',
+    name: '核心商圈',
+  },
+  {
+    image:
+        'https://project-user-resource-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010113669698766.png',
+    name: '全景参观',
+  },
+  {
+    image:
+        'https://project-user-resource-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010113663525642.png',
+    name: '咨询热线',
   }
-}
+];
+let homeData = [
+  {
+    id:1,
+    image:
+        'https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010093853079242.png',
+    name: '维新软件科学园',
+    address: '深圳市南山区中心路3331号',
+    price: '¥1,870',
+    info: '起/工位/月',
+  },
+  {
+    id:2,
+    image:
+        'https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010093836713715.png',
+    name: '中集大厦',
+    address: '深圳市南山区高新南九道9号',
+    price: '¥2,240',
+    info: '起/工位/月',
+  },
+  {
+    id:3,
+    image:
+        'https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010093817997494.png',
+    name: '深业大厦',
+    address: '深圳市福田区后山路500号',
+    price: '¥1,650',
+    info: '起/工位/月',
+  },
+];
+let banner = ref('https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/5eedc9543259190011441867/60c321886d32e90012f09dc4/16234010093791214053.png');
+const router = useRouter()
+const state = reactive({
+  list:[],
+  goToPage(path:string,item:any):void {
+    console.log(item)
+    router.push(path+'?id='+item.id)
+  }
+})
+
+mokeGet().then((res:any)=>{
+  console.log(res.data)
+  if(res.status === 200 || res.status === 201){
+    homeData = res.data
+  }
+}).catch((err:any)=>{
+  console.log(err)
+  if(err.status === 401){
+    centerDialogVisible = ref(true)
+  }
+})
+console.log(homeData)
 </script>
 
 <style lang="scss" scoped>
